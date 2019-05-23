@@ -1,6 +1,6 @@
 <?php
 
-namespace Deozza\ResponseMaker;
+namespace Deozza\ResponseMakerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

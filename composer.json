@@ -1,5 +1,5 @@
 {
-    "name": "deozza/response-maker",
+    "name": "deozza/response-maker-bundle",
     "description": "A simple way to send serialized json response",
     "type": "symfony-bundle",
     "license": "MIT",
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Deozza\\ResponseMaker\\": "src/"
+            "Deozza\\ResponseMakerBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Deozza\\ResponseMaker\\Tests\\": "tests/"
+            "Deozza\\ResponseMakerBundle\\Tests\\": "tests/"
         }
     }
 }

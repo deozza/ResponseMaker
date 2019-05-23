@@ -1,5 +1,5 @@
 <?php
-namespace Deozza\ResponseMaker\Service;
+namespace Deozza\ResponseMakerBundle\Service;
 
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;

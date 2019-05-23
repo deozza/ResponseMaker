@@ -1,6 +1,6 @@
 <?php
 
-namespace Deozza\ResponseMaker\Service;
+namespace Deozza\ResponseMakerBundle\Service;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;

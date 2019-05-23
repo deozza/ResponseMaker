@@ -1,6 +1,6 @@
 <?php
 
-namespace Deozza\ResponseMaker\DependencyInjection;
+namespace Deozza\ResponseMakerBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
