@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service class="Deozza\PhilarmonyBundle\Service\ResponseMaker" id="philarmony.response_maker">
+            <bind key="$serializer" type="service" id="jms_serializer.serializer"/>
+        </service>
+        <service id="Deozza\PhilarmonyBundle\Service\ResponseMaker" alias="philarmony.response_maker"/>
+
+        <service class="Deozza\PhilarmonyBundle\Service\FormManager\FormErrorSerializer" id="philarmony.form_error">
+            <bind key="$translator" type="service" id="translator.default"/>
+        </service>
+        <service id="Deozza\PhilarmonyBundle\Service\FormManager\FormErrorSerializer" alias="philarmony.form_error" />
+    </services>
+</container>
