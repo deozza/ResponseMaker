@@ -10,9 +10,9 @@
         </service>
         <service id="Deozza\ResponseMakerBundle\Service\ResponseMaker" alias="philarmony.response_maker"/>
 
-        <service class="Deozza\ResponseMakerBundle\Service\FormManager\FormErrorSerializer" id="philarmony.form_error">
+        <service class="Deozza\ResponseMakerBundle\Service\FormErrorSerializer" id="philarmony.form_error">
             <bind key="$translator" type="service" id="translator.default"/>
         </service>
-        <service id="Deozza\ResponseMakerBundle\Service\FormManager\FormErrorSerializer" alias="philarmony.form_error" />
+        <service id="Deozza\ResponseMakerBundle\Service\FormErrorSerializer" alias="philarmony.form_error" />
     </services>
 </container>
