@@ -1,0 +1,13 @@
+{
+    "name": "deozza/response-maker",
+    "description": "A simple way to send serialized json response",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Edenn Touitou",
+            "email": "deozza@gmail.com"
+        }
+    ],
+    "require": {}
+}
