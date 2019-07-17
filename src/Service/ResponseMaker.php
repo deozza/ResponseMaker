@@ -28,13 +28,13 @@ class ResponseMaker
         $this->serializer = $serializer;
         $this->formErrorSerializer = $formErrorSerializer;
     }
+
     public function methodNotAllowed(string $method)
     {
         $this->response->setStatusCode(self::NOT_ALLOWED);
         $this->response->setContent(json_encode(["error"=>sprintf(self::NOT_ALLOWED_MESSAGE, $method)]));
         return $this->response;
     }
-
 
     public function badRequest($message)
     {
@@ -111,14 +111,14 @@ class ResponseMaker
         return $this->response;
     }
 
-    public function okPaginated($item = null, $serializerGroups = ['Default'])
+    public function okPaginated(array $item = null, $serializerGroups = ['Default'], int $count, int $page, int $total)
     {
         $this->response->setStatusCode(self::OK);
         $content = [
-            "current_page_number"=>$item->getCurrentPageNumber(),
-            "num_items_per_page"=>$item->getItemNumberPerPage(),
-            "items"=>$item->getItems(),
-            "total_count"=>$item->getTotalItemCount()
+            "current_page_number"=>$page,
+            "num_items_per_page"=>$count,
+            "items"=>$item,
+            "total_count"=>$total
         ];
         $serialied = $this->serializer->serialize($content, 'json', SerializationContext::create()->setGroups($serializerGroups));
         $this->response->setContent($serialied);
