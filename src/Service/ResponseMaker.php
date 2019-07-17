@@ -21,11 +21,12 @@ class ResponseMaker
     const EMPTY = 204;
     const CONTENT_TYPE = ['Content-Type'=>"application/json"];
 
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer, FormErrorSerializer $formErrorSerializer)
     {
         $this->response = new JsonResponse();
         $this->response->headers->add(self::CONTENT_TYPE);
         $this->serializer = $serializer;
+        $this->formErrorSerializer = $formErrorSerializer;
     }
     public function methodNotAllowed(string $method)
     {
@@ -40,6 +41,11 @@ class ResponseMaker
         $this->response->setStatusCode(self::BAD_REQUEST);
         $this->response->setContent(json_encode(["error"=>$message]));
         return $this->response;
+    }
+
+    public function badForm($form)
+    {
+        return $this->badRequest($this->formErrorSerializer->convertFormToArray($form));
     }
 
     public function notFound(string $message)
@@ -82,9 +88,9 @@ class ResponseMaker
 
         $this->response->setContent(
             json_encode(
-                    ["conflicts" => $message, "context"=>json_decode($serializedContext)]
+                ["conflicts" => $message, "context"=>json_decode($serializedContext)]
 
-                )
+            )
         );
         return $this->response;
     }

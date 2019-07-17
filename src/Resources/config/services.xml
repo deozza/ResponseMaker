@@ -7,6 +7,7 @@
     <services>
         <service class="Deozza\ResponseMakerBundle\Service\ResponseMaker" id="philarmony.response_maker">
             <bind key="$serializer" type="service" id="jms_serializer.serializer"/>
+            <bind key="$formErrorSerializer" type="service" id="philarmony.form_error"/>
         </service>
         <service id="Deozza\ResponseMakerBundle\Service\ResponseMaker" alias="philarmony.response_maker"/>
 
