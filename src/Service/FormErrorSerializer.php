@@ -3,55 +3,24 @@ namespace Deozza\ResponseMakerBundle\Service;
 
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Translation\TranslatorInterface;
-
 
 class FormErrorSerializer
 {
     private $translator;
 
-    public function __construct(TranslatorInterface $translator)
+    public function convertFormToArray(FormInterface $form)
     {
-        $this->translator = $translator;
-    }
-
-    public function convertFormToArray(FormInterface $data)
-    {
-        $form = $errors = [];
-
-        foreach ($data->getErrors() as $error) {
-            $errors[] = $this->getErrorMessage($error);
+        $errors = array();
+        foreach ($form->getErrors() as $error) {
+            $errors[] = $error->getMessage();
         }
-
-        if ($errors) {
-            $form['errors'] = $errors;
-        }
-
-        $children = [];
-        foreach ($data->all() as $child) {
-            if ($child instanceof FormInterface) {
-                $children[$child->getName()] = $this->convertFormToArray($child);
+        foreach ($form->all() as $childForm) {
+            if ($childForm instanceof FormInterface) {
+                if ($childErrors = $this->convertFormToArray($childForm)) {
+                    $errors[$childForm->getName()] = $childErrors;
+                }
             }
         }
-
-        if ($children) {
-            $form['children'] = $children;
-        }
-
-        return $form;
-    }
-
-    private function getErrorMessage(FormError $error)
-    {
-        if (null !== $error->getMessagePluralization()) {
-            return $this->translator->transChoice(
-                $error->getMessageTemplate(),
-                $error->getMessagePluralization(),
-                $error->getMessageParameters(),
-                'validators'
-            );
-        }
-
-        return $this->translator->trans($error->getMessageTemplate(), $error->getMessageParameters(), 'validators');
+        return $errors;
     }
 }
