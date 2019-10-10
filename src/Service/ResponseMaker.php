@@ -111,23 +111,16 @@ class ResponseMaker
         return $this->response;
     }
 
-    public function okPaginated(array $item = null, $serializerGroups = ['Default'], int $count, int $page, int $total)
+    public function okPaginated(array $item = null, $serializerGroups = ['Default'], int $count, int $page)
     {
         $this->response->setStatusCode(self::OK);
         $content = [
             "current_page_number"=>$page,
             "num_items_per_page"=>$count,
-            "items"=>$item,
-            "total_count"=>$total
+            "items"=>$item
         ];
         $serialied = $this->serializer->serialize($content, 'json', SerializationContext::create()->setGroups($serializerGroups));
         $this->response->setContent($serialied);
-        return $this->response;
-    }
-
-    public function empty()
-    {
-        $this->response->setStatusCode(self::EMPTY);
         return $this->response;
     }
 }
